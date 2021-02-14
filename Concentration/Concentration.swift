@@ -48,7 +48,7 @@ struct Concentration {
      - Parameter index: Index of the touched card from the interface.
      */
     mutating func chooseCard(at index: Int) {
-        if !cards[index].isMatched {
+        if !cards[index].isMatched, !cards[index].isFaceUp {
             flipsCount += 1
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, index != matchIndex {
                 cards[index].numberOfTimesWasRevealed += 1
