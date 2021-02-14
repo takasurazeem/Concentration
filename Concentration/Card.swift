@@ -10,7 +10,7 @@ import Foundation
 struct Card : Hashable {
     
     var id: Int
-    var isFaceUp = true
+    var isFaceUp = false
     var isMatched = false
     var numberOfTimesWasRevealed = 0
     
