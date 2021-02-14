@@ -31,6 +31,7 @@ struct Concentration {
     private(set) var selectedTheme: GameTheme!
     
     init(numberOfPairOfCards: Int) {
+        populateGameThemes()
         assert(gameThemes.count >= 2, "There must be at least two themes to beging the game")
         selectedTheme = gameThemes[Array(gameThemes.keys).randomElement()!]
         assert(selectedTheme.emojis.count >= numberOfPairOfCards, "Number of pairs or cards is more than the emojis in \(selectedTheme!)")
@@ -92,16 +93,17 @@ struct Concentration {
         return emojis[card] ?? "?"
     }
     
-    private var gameThemes = [
-        "faces" : GameTheme(emojis: "😥😓🤗🤭🤔🤫🤥😶😐😑😬🙄😯😦😧😮🥱😴🤐🤠", primaryColor: #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "animals" : GameTheme(emojis: "🐱🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐵🙈🙉🙊🐒🐔🐧🐤🐣🐥🐝🐛🦋🐞🪲🦕", primaryColor: #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "travel" : GameTheme(emojis: "🚗🚕🚙🏎🚚🛻🚐🚓🚑🚒🚛🚜🛵🏍🛺🚂", primaryColor: #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "sports" : GameTheme(emojis: "⚽️🏀🏈⚾️🥎🎾🏐🏉🥏🎱🪀🏓🏸🏒🏑🥍🏏🪃🥅⛳️🏹🎣🥊", primaryColor: #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "stationary" : GameTheme(emojis: "📚📖📎🖇📐📏🧮📌📍✂️🖊🖋✒️🖌🖍✏️🔍🔏🔐", primaryColor: #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "flags" : GameTheme(emojis: "🏳️🏴🏴‍☠️🏁🚩🏳️‍🌈🏳️‍⚧️🇺🇳🇦🇫🇦🇽🇦🇱🇩🇿🇦🇸🇦🇩🇦🇴🇦🇮🇦🇶🇦🇬🇦🇷🇦🇲🇦🇼🇦🇺🇦🇹🇦🇿🇧🇸🇧🇭🇧🇩🇧🇧🇧🇾🇧🇪🇧🇳🇧🇬🇧🇫🇧🇮🇰🇭🇨🇲🇨🇦🇮🇨🇮🇷🇵🇰🇸🇦🇾🇪🇪🇭🇺🇿", primaryColor: #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "planets" : GameTheme(emojis: "🪐🌏✈️🛩🔭☄️🛸👽🛰👾🚀👩🏼‍🚀🧑🏼‍🚀👨🏼‍🚀", primaryColor: #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1)),
-        "hearts" : GameTheme(emojis: "❤️🧡💛💚💙💜🖤🤍🤎💔❣️💕💞💓💗💖💘💝💟", primaryColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
-    ]
+    private var gameThemes = [String:GameTheme]()
     
+    mutating func populateGameThemes() {
+        gameThemes["faces"] = GameTheme(emojis: "😥😓🤗🤭🤔🤫🤥😶😐😑😬🙄😯😦😧😮🥱😴🤐🤠", primaryColor: #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["animals"] = GameTheme(emojis: "🐱🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐵🙈🙉🙊🐒🐔🐧🐤🐣🐥🐝🐛🦋🐞🪲🦕", primaryColor: #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["travel"] = GameTheme(emojis: "🚗🚕🚙🏎🚚🛻🚐🚓🚑🚒🚛🚜🛵🏍🛺🚂", primaryColor: #colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["sports"] = GameTheme(emojis: "⚽️🏀🏈⚾️🥎🎾🏐🏉🥏🎱🪀🏓🏸🏒🏑🥍🏏🪃🥅⛳️🏹🎣🥊", primaryColor: #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["stationary"] = GameTheme(emojis: "📚📖📎🖇📐📏🧮📌📍✂️🖊🖋✒️🖌🖍✏️🔍🔏🔐", primaryColor: #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["flags"] = GameTheme(emojis: "🏳️🏴🏴‍☠️🏁🚩🏳️‍🌈🏳️‍⚧️🇺🇳🇦🇫🇦🇽🇦🇱🇩🇿🇦🇸🇦🇩🇦🇴🇦🇮🇦🇶🇦🇬🇦🇷🇦🇲🇦🇼🇦🇺🇦🇹🇦🇿🇧🇸🇧🇭🇧🇩🇧🇧🇧🇾🇧🇪🇧🇳🇧🇬🇧🇫🇧🇮🇰🇭🇨🇲🇨🇦🇮🇨🇮🇷🇵🇰🇸🇦🇾🇪🇪🇭🇺🇿", primaryColor: #colorLiteral(red: 1, green: 0.8323456645, blue: 0.4732058644, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["planets"] = GameTheme(emojis: "🪐🌏✈️🛩🔭☄️🛸👽🛰👾🚀👩🏼‍🚀🧑🏼‍🚀👨🏼‍🚀", primaryColor: #colorLiteral(red: 0.8446564078, green: 0.5145705342, blue: 1, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+        gameThemes["hearts"] = GameTheme(emojis: "❤️🧡💛💚💙💜🖤🤍🤎💔❣️💕💞💓💗💖💘💝💟", primaryColor: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), backgroundColor: #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 1))
+    }
     
 }
